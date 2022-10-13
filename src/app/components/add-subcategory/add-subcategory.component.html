@@ -1,0 +1,89 @@
+<div id="modal_modifier2" class="modal fade modal-medium" role="dialog" tabindex="-1" aria-hidden="true" style="display: none;">
+
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <form #myForm="ngForm"   ngNativeValidate>
+      <div ngModelGroup="subcategoryDetails" #subcategoryDetail="ngModelGroup">
+        <div class="modal-content">
+          <div class="modal-header modal-header-form">
+            <button type="button" class="close" data-dismiss="modal">×</button>
+            <div class="pull-left">
+              <h4 class="modal-title">Catégorie</h4>
+            </div>
+          </div>
+          <div id="ctl0_CONTENU_PAGE_ctl0_panelInfoModal" class="modal-body">
+            <div class="row">
+              <div class="col-md-3">
+                <label for="categoryName">Sous Catégorie <span class="obligatoire" title="Obligatoire"> *</span> :</label>
+              </div>
+              <div class="col-md-6">
+                <input type="text" id="categoryName" placeholder="Nouvelle sous catégorie"
+                       name="subcategoryName" [(ngModel)]="this.addedSubcategory.subcategoryName"   class="form-control"   required ></div>
+
+            </div>
+
+            <div class="row spacer">
+              <div class="col-md-3">
+                <label >
+                  Catégorie <span class="obligatoire" title="Obligatoire"> *</span> :
+                </label>
+              </div>
+              <div class="col-md-6">
+                <mat-form-field   >
+                  <mat-select class="form-control" id="category" name="categoryId" [(ngModel)]="this.addedSubcategory.categories" required>
+                    <mat-option  [value]="option.id" *ngFor="let option of categories">
+                      {{ option.categoryName}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+            </div>
+
+            <div class="row spacer" id="divDesactiverNumInventory">
+              <div class="col-md-3">
+                <label>Avec/Sans num inventaire<span class="obligatoire" title="Obligatoire">*</span>:</label>
+              </div>
+              <div class="col-md-1" style="display:flex; flex-direction: row; justify-content: center; align-items: center" >
+            <span  *ngFor="let option of options" style="display:flex; flex-direction: row; justify-content: center; align-items: center">
+            <input  type="radio" id="{{option.id}}" value="{{option.value}}" name="inventory" [ngModel]="this.addedSubcategory.inventory" required>
+            <label >{{option.val}}</label>
+               </span>
+              </div>
+
+            </div>
+
+            <div class="row spacer" id="divDesactiverNumSerie">
+              <div class="col-md-3">
+                <label>Avec/Sans num série <span class="obligatoire" title="Obligatoire"> *</span> :</label>
+              </div>
+              <div class="col-md-1" style="display:flex; flex-direction: row; justify-content: center; align-items: center">
+            <span  *ngFor="let option of options" style="display:flex; flex-direction: row; justify-content: center; align-items: center">
+            <input  type="radio" id="{{option.id+2}}" value="{{option.value}}" name="serie" [ngModel]="this.addedSubcategory.serie" required>
+            <label >{{option.val}}</label>
+               </span>
+              </div>
+
+            </div>
+
+          </div>
+          <div class="modal-footer form-actions">
+            <div class="form-group">
+              <div class="pull-left">
+                <button class="btn btn-default btn-sm" type="button" value="Annuler" id="Annuler" data-dismiss="modal" onclick="clearModal();"><i class="fa fa-times"></i> Fermer</button>
+              </div>
+              <div class="pull-right">
+                <button [disabled]="myForm.form.invalid"  id="ctl0_CONTENU_PAGE_ctl0_ctl7" class="btn btn-primary btn-sm btn-valider" alt="Valider" title="Valider"(click)="onSubmit();"href="javascript:;//ctl0_CONTENU_PAGE_ctl0_ctl7">
+                  Valider
+
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+  <!-- Dialog template -->
+
+
+</div>

@@ -1,0 +1,206 @@
+
+<!-- MENU SECTION END-->
+<app-header xmlns:skipLocationChange="http://www.w3.org/1999/xhtml"></app-header>
+
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <h4 class="page-head-line">Demande de sortie</h4>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <p class="fr">Les champs obligatoires sont marqués par un <span class="obligatoire">*</span>.</p>
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <label>Demande de sortie</label>
+          </div>
+          <div class="panel-body">
+            <div class="row spacer">
+              <div class="col-md-3">
+                <label for="numBD">N° de la demande <span class="obligatoire" title="Obligatoire"> *</span>:</label>
+              </div>
+              <div class="col-md-3">
+                <input type="text" id="numBD" class="form-control ">
+              </div>
+            </div>
+            <div class="row spacer">
+              <div class="col-md-3">
+                <label >Date de la demande <span class="obligatoire" title="Obligatoire"> *</span>:</label>
+              </div>
+              <div class="col-md-6">
+                <div class="input-group date">
+                  <input name="date_demande" type="text"  class="form-control"  placeholder="jj/mm/aaaa"/>
+                  <span class="input-group-addon"><i class="fa fa-th"></i></span>
+                </div>
+              </div>
+            </div>
+            <div class="row spacer">
+              <div class="col-md-3">
+                <label for="entite">
+                  Entité <span class="obligatoire" title="Obligatoire">*</span> :
+                </label>
+              </div>
+              <div class="col-md-6">
+                <select class="form-control chosen-select " id="entite">
+                  <option value="0">Sélectionnez...</option>
+                </select>
+              </div>
+            </div>
+            <div class="row spacer">
+              <div class="col-md-3">
+                <label for="beneficiaire">Bénéficiaire <span class="obligatoire" title="Obligatoire"> *</span>:</label>
+              </div>
+              <div class="col-md-3">
+                <input type="text" id="beneficiaire" class="form-control ">
+              </div>
+            </div>
+
+
+            <div class="row spacer">
+              <div class="col-md-12">
+                <div class="notice-board">
+                  <div class="panel panel-default">
+                    <div class="panel-heading">
+                      <label>Produits demandés</label>
+                    </div>
+                    <div class="panel-body">
+                      <div class="repeater-viewport panel-table">
+                        <table class="table table-bordered table-striped table-suivi table-matériel table-hover">
+                          <thead>
+                          <tr>
+                            <th id="col_01" class="col-refs col-md-2">Catégorie</th>
+                            <th id="col_02" class="col-refs col-md-2">Sous Catégorie</th>
+                            <th id="col_03" class="col-refs col-md-2">Désignation</th>
+                            <th id="col_04" class="col-refs col-md-2">Quantité demandée</th>
+                            <th id="col_05" class="col-refs col-md-2">Observation</th>
+                            <th id="col_06" class="actions col-md-1 ">Actions</th>
+                          </tr>
+                          </thead>
+                          <tbody>
+                          <tr class="details_1">
+                            <td headers="col_01">Matériel de Bureau</td>
+                            <td headers="col_02">Bureau</td>
+                            <td headers="col_03">Chaise de bureau</td>
+                            <td headers="col_04"  class="nombre-alignement">10</td>
+                            <td headers="col_05">Lorem Ipsum - Esse video qui igitur politus.</td>
+                            <td headers="col_06" class="actions ">
+                              <a class="btn btn-xs btn-primary" alt="Modifier" title="Modifier" onclick="$('.details_1').hide();$('.modif_1').show();">
+                                <i class="fa fa-pencil-square-o"></i>
+                              </a>
+                              <a class="btn btn-xs btn-primary" alt="Supprimer" title="Supprimer" >
+                                <i class="fa fa-trash-o"></i>
+                              </a>
+                            </td>
+                          </tr>
+                          <tr class="modif_1" style="display:none">
+                            <td headers="col_01">
+                              <select class="form-control chosen-select" id="categorie">
+                                <option value="0">Sélectionnez...</option>
+                                <option value="1" selected>Matériel de Bureau</option>
+                                <option value="2">Matériel de Couchage et de campement </option>
+                              </select>
+                            </td>
+                            <td headers="col_02">
+                              <select class="form-control chosen-select" id="sous-categorie">
+                                <option value="0">Sélectionnez...</option>
+                                <option value="1" selected>Bureau</option>
+                                <option value="2">Bureau-désign-2017</option>
+                              </select>
+                            </td>
+                            <td headers="col_03">
+                              <select class="form-control chosen-select" id="produit">
+                                <option value="0">Sélectionnez...</option>
+                                <option value="1" selected>Chaise de bureau</option>
+                                <option value="2">chaise salle de réunion</option>
+                                <option value="3">bureau droit</option>
+                              </select>
+                            </td>
+                            <td headers="col_04"><input type="text" class="form-control" value="10" /></td>
+                            <td headers="col_05">
+                              <textarea class="form-control">Lorem Ipsum - Esse video qui igitur politus.</textarea>
+                            </td>
+                            <td headers="col_06" class="actions ">
+                              <a class="btn btn-primary" alt="Modifier" title="Modifier" onclick="$('.details_1').show();$('.modif_1').hide();">
+                                Modifier</a>
+                            </td>
+                          </tr>
+
+                          </tbody>
+                          <tfoot>
+                          <tr>
+                            <td headers="col_01">
+                              <select class="form-control chosen-select">
+                                <option value="0">Sélectionnez...</option>
+                                <option value="1" >Matériel de Bureau</option>
+                                <option value="2">Matériel de Couchage et de campement </option>
+                              </select>
+                            </td>
+                            <td headers="col_02">
+                              <select class="form-control chosen-select">
+                                <option value="0">Sélectionnez...</option>
+                                <option value="1" >Bureau</option>
+                                <option value="2">Bureau-désign-2017</option>
+                              </select>
+                            </td>
+                            <td headers="col_03">
+                              <select class="form-control chosen-select">
+                                <option value="0">Sélectionnez...</option>
+                                <option value="1" >Chaise de bureau</option>
+                                <option value="2">chaise salle de réunion</option>
+                                <option value="3">bureau droit</option>
+                              </select>
+                            </td>
+                            <td headers="col_04"><input type="text" class="form-control" /></td>
+                            <td headers="col_05">
+                              <textarea class="form-control"></textarea>
+                            </td>
+                            <td headers="col_06" class="actions ">
+                              <a class="btn btn-primary" alt="Modifier" title="Modifier">
+                                Ajouter
+                              </a>
+                            </td>
+                          </tr>
+                          </tfoot>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="panel-footer form-actions">
+            <div class="form-group">
+              <div class="pull-left">
+                <button class="btn btn-default btn-sm" type="button" value="Annuler"><i class="fa fa-angle-double-left"></i> Retour</button>
+              </div>
+              <div class="pull-right">
+                <a class="btn btn-primary btn-sm" href="details_demande_sortie_attente_traitement.html"><i class="fa fa-floppy-o"></i> Enregister</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<script>
+  $(document).on('ready', function() {
+    $(".file-loading").fileinput({showCaption: false,  language: "fr",'showUpload': false});
+    $('.input-group.date').datepicker({format: "dd/mm/yyyy",language: "fr"});
+    $('.chosen-select').chosen({language: "fr"});
+
+    $('#type_demande').on('change', function(){
+      if($(this).find("option:selected").attr('value') == 1){
+        $('.demande_interne').show();
+        $('.demande_externe').hide();
+      }else{
+        $('.demande_interne').hide();
+        $('.demande_externe').show();
+      }
+    });
+  });
+</script>
+
+

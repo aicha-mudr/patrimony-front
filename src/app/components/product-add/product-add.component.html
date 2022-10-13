@@ -1,0 +1,102 @@
+<div id="modal_add_product" class="modal fade modal-medium" role="dialog" tabindex="-1">
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <form #myForm="ngForm"   ngNativeValidate>
+      <div ngModelGroup="productDetails" #productDetail="ngModelGroup">
+        <div class="modal-content">
+          <div class="modal-header modal-header-form">
+            <button type="button" class="close" data-dismiss="modal">×</button>
+            <div class="pull-left">
+              <h4 class="modal-title">Ajout produit</h4>
+            </div>
+          </div>
+          <div id="ctl0_CONTENU_PAGE_ctl0_panelInfoModal" class="modal-body">
+
+
+            <div class="row spacer">
+              <div class="col-md-3">
+                <label >
+                  Catégorie <span class="obligatoire" title="Obligatoire"> *</span> :
+                </label>
+              </div>
+              <div class="col-md-6">
+                <mat-form-field   >
+
+                  <mat-select class="form-control" id="category" name="categoryId" [(ngModel)]="this.categorySelected"  (ngModelChange)="onCategoryselected($event)" required>
+                    <mat-option  [value]="option.id" *ngFor="let option of categories">
+                      {{ option.categoryName}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="row spacer">
+              <div class="col-md-3">
+                <label >
+                  Sous catégorie <span class="obligatoire" title="Obligatoire"> *</span> :
+                </label>
+              </div>
+              <div class="col-md-6">
+                <mat-form-field   >
+
+                  <mat-select class="form-control" id="subCategory" name="subCategoryId" [(ngModel)]="this.addedProduct.subcategory"   required>
+                    <mat-option  [value]="option.id" *ngFor="let option of filtredSubcategories">
+                      {{  option.subcategoryName }}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="row spacer">
+              <div class="col-md-3">
+                <label >Code produit <span class="obligatoire" title="Obligatoire"> *</span> :</label>
+              </div>
+              <div class="col-md-6">
+                <input type="text" id="codeProduit" placeholder="code produit"
+                       name="codeProduct"   class="form-control" [(ngModel)]="this.addedProduct.codeProduct"   required ></div>
+
+            </div>
+            <div class="row spacer">
+              <div class="col-md-3">
+                <label>Désignation <span class="obligatoire" title="Obligatoire"> *</span> :</label>
+              </div>
+              <div class="col-md-6">
+                <input type="text" id="Designation" placeholder="désignation"
+                       name="Designation"   class="form-control" [(ngModel)]="this.addedProduct.designation"   required ></div>
+
+            </div>
+            <div class="row spacer">
+              <div class="col-md-3">
+                <label >Quantité seuil de déclanchement d'une alerte <span class="obligatoire" title="Obligatoire"> *</span> :</label>
+              </div>
+              <div class="col-md-6">
+                <input type="number" id="minQuantity" placeholder="quantité min"
+                       name="minQuantity"   class="form-control" [(ngModel)]="this.addedProduct.minQuantity"   required ></div>
+
+
+
+
+
+          </div>
+          <div class="modal-footer form-actions">
+            <div class="form-group">
+              <div class="pull-left">
+                <button class="btn btn-default btn-sm" type="button" value="Annuler" id="Annuler" data-dismiss="modal" onclick="clearModal();"><i class="fa fa-times"></i> Fermer</button>
+              </div>
+              <div class="pull-right">
+                <button [disabled]="myForm.form.invalid"  id="ctl0_CONTENU_PAGE_ctl0_ctl7" class="btn btn-primary btn-sm btn-valider" alt="Valider" title="Valider"(click)="onSubmit();"href="javascript:;//ctl0_CONTENU_PAGE_ctl0_ctl7">
+                  Valider
+
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      </div>
+    </form>
+  </div>
+  <!-- Dialog template -->
+
+
+</div>

@@ -1,0 +1,120 @@
+<router-outlet></router-outlet>
+
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+    <meta name="description" content=""/>
+    <meta name="author" content=""/>
+    <!--[if IE]>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <![endif]-->
+    <title>Plate-forme de gestion du Patrimoine</title>
+    <!-- BOOTSTRAP CORE STYLE  -->
+    <link href="/assets/css/bootstrap.css" rel="stylesheet"/>
+    <!-- FONT AWESOME ICONS  -->
+    <link href="/assets/css/font-awesome.css" rel="stylesheet"/>
+    <link href="/assets/css/bootstrap-chosen.css" rel="stylesheet"/>
+    <link href="/assets/css/bootstrap-datepicker.min.css" rel="stylesheet"/>
+    <link href="/assets/css/font-awesome.css" rel="stylesheet"/>
+    <link href="/assets/css/fileinput.css" rel="stylesheet"/>
+
+    <!-- CUSTOM STYLE  -->
+    <link href="/assets/css/style.css" rel="stylesheet"/>
+    <link href="app.component.scss" rel="stylesheet"/>
+    <link href="/assets/css/style-client.css" rel="stylesheet">
+    <!-- CORE JQUERY SCRIPTS -->
+    <script src="/assets/js/jquery-1.11.1.js"></script>
+    <!-- BOOTSTRAP SCRIPTS  -->
+    <script src="/assets/js/bootstrap.js"></script>
+    <script src="/assets/js/bootstrap-datepicker.min.js"></script>
+    <script src="/assets/js/bootstrap-datepicker.fr.min.js"></script>
+    <script src="/assets/js/chosen.jquery.js"></script>
+    <script src="/assets/js/fileinput.js"></script>
+    <script src="/assets/js/locales/fr.js" type="text/javascript"></script>
+    <script src="/assets/js/main.js"></script>
+
+</head>
+
+<!--Navside code-->
+<mat-toolbar  class="navbar navbar-fixed-top navbar-dark bg-inverse" style="background-color: #04b1d4;">
+    <mat-toolbar-row>
+      <button mat-icon-button>
+        <mat-icon style="color:blanchedalmond" (click)="sidebarmenu.toggle()">menu</mat-icon>
+      </button>
+      <h2 style="color:blanchedalmond">Gestion du Patrimoine</h2>
+    </mat-toolbar-row>
+
+  </mat-toolbar>
+  <br><br><br>
+        
+  <mat-sidenav-container >
+    <mat-sidenav #sidebarmenu  style="background-color: #373c3d; width: 290px;position: fixed;">
+      <mat-nav-list>
+        <br><br><br><br>
+        <a mat-list-item [routerLink]="'/accueil'"  class="nav-link dropdown-toggle" style="text-decoration: none;color:blanchedalmond"  id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Accueil
+      </a>
+        <li class="nav-item dropdown">
+            
+           
+            <a mat-list-item   class="nav-link dropdown-toggle" style="text-decoration: none;color:blanchedalmond" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Gestion d'entrée
+            </a>
+            <div style="background-color: #5b5f5f;" class="dropdown-menu"  aria-labelledby="navbarDropdown">
+              <div class="dropdown-divider"></div>
+             <B> <a style="color:rgb(37, 150, 190)" class="dropdown-item" > .&emsp; Bon d'entrée</a></B>
+              <a style="color:blanchedalmond" (click)="sidebarmenu.toggle()" mat-list-item [routerLink]="'/addEntryDemandComponent'" >Ajouter un bon d'entrée</a>
+              <a style="color:blanchedalmond" mat-list-item [routerLink]="'/AllEntryRequests'" class="dropdown-item" >Tous les bons d'entrée</a>
+              </div>
+          </li>
+          <li class="nav-item dropdown">
+            <a mat-list-item class="nav-link dropdown-toggle" style="text-decoration: none; color:blanchedalmond"  id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Sortie stock
+            </a>
+            <div style="background-color: #5b5f5f;" class="dropdown-menu"  aria-labelledby="navbarDropdown">
+              <div class="dropdown-divider"></div>
+
+            <B><a  style="color:rgb(37, 150, 190) " class="dropdown-item" href="#">.&emsp;Demande de sortie</a></B>
+              <a style="color:blanchedalmond" mat-list-item [routerLink]="'/Affectationdemand'" class="dropdown-item" href="#">Ajouter une demande de sortie</a>
+              <a style="color:blanchedalmond" mat-list-item [routerLink]="'/allDemandAffectationComponent'" class="dropdown-item" href="#">Toutes les demandes de sortie</a>
+              <div class="dropdown-divider"></div>
+            </div>
+          </li>
+
+        <li class="nav-item dropdown">
+            <a mat-list-item [routerLink]="'/home'" class="nav-link dropdown-toggle" style="text-decoration: none;color:blanchedalmond" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Paramétrage
+            </a>
+            <div style="background-color: #5b5f5f;" class="dropdown-menu"  aria-labelledby="navbarDropdown">
+              <div class="dropdown-divider"></div>
+              <nav>
+              <a style="color:blanchedalmond" (click)="sidebarmenu.toggle()" mat-list-item [routerLink]="'/categoryManagement'" class="dropdown-item" >Catégories</a>
+              <a style="color:blanchedalmond" (click)="sidebarmenu.toggle()" mat-list-item [routerLink]="'/productManagement'" class="dropdown-item" >Produits</a>
+            </nav>
+            </div>
+          </li>
+          <a mat-list-item [routerLink]="'/stock'" style="color:blanchedalmond; text-decoration: none;">Stock</a>
+      
+
+      </mat-nav-list>
+    </mat-sidenav>
+    <mat-sidenav-content>
+      <div style="height: 92vh">
+        <router-outlet></router-outlet>
+      </div>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+
+
+
+<!--End Navside code-->
+
+
+
+<script>
+$(document).on('ready', function() {
+  $(".file-loading").fileinput({showCaption: false,  language: "fr",'showUpload': false});                                    
+  $('.input-group.date').datepicker({format: "dd/mm/yyyy",language: "fr",enableOnReadonly: true});
+  $('.chosen-select').chosen({language: "fr"});
+});
+</script>           

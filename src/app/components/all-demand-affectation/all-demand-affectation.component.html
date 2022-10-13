@@ -1,0 +1,118 @@
+<app-header></app-header>
+<div >
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h4 class="page-head-line">Demandes de sortie</h4>
+            </div>
+        </div>         
+        
+        <div class="row">
+            <div class="col-md-12">
+                <div class="tab-content">
+                    <div id="tous" class="tab-pane fade in active">
+                        <div class="panel-table">
+                            <div class="repeater-header">
+                                <!--Debut Pagnination top-->
+                            <pagination-controls  (pageChange)="p=$event"></pagination-controls>
+
+                                    <!--Fin Pagnination top-->
+                               
+
+                            <div class="repeater-viewport">
+                                <table class="table table-bordered table-striped table-suivi table-contrats table-hover">
+                                    <thead>
+                                        <tr><th id="col_02" class="col-refs col-md-2" >N° de la demande</th>
+                                            <th id="col_03" class="col-refs col-md-2" >Date de demande </th>
+                                            <th id="col_04" class="col-refs col-md-3" >Entité</th>
+                                            <th id="col_05" class="col-refs col-md-2" >Bénéficiaire</th>
+                                            <th id="col_06" class="col-refs col-md-2" >Etat </th>                                   
+                                            <th id="col_07" class="actions col-md-1" ><div>Actions</div></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let demand of affectedDemands | orderBy: key : reverse |paginate:{itemsPerPage:6, currentPage:p};">
+                                            <td headers="col_02" >
+                                                <div>{{demand.numDemand}}</div>
+                                            </td>
+                                            <td headers="col_03" >
+                                                <div>{{demand.dateAffectation}}</div>
+                                            </td>
+                                            <td headers="col_04" >
+                                                <div>{{demand.idEntity.label}} </div>
+                                            </td>
+                                            <td headers="col_05" >
+                                                <div>{{demand.beneficiary}}</div>
+                                            </td>
+                                            <td headers="col_06" >
+                                                <div>{{demand.demandstate.state}}</div>
+                                            </td>                                              
+                                            <td headers="col_07"  class="actions">
+                                                <a *ngIf="demand.demandstate.id!=3" id="editEntry" class="btn btn-xs btn-primary"  style="margin:5px;" (click)="editDemand(demand)" alt="Modifier" title="Modifier" >
+
+                                                    <i class="fa fa-pencil-square-o"></i>
+                                                  </a>
+                                                  <a *ngIf="demand.demandstate.id==3" class="btn btn-primary btn-xs"  title="Voir le détail" (click)="detail(demand)"> <span class="fa fa-search"></span>
+                                               </a>                                      
+                                            </td>
+                                        </tr> 
+                                                                     
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <div class="repeater-footer">
+                                <div class="repeater-footer-left">                                                                    
+                                </div>
+                                
+                            </div>
+                        </div>
+                    </div>
+                                 
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="modal_validation_envoi" class="modal fade modal-medium" role="dialog" tabindex='-1'>
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header modal-header-form">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <div class="pull-left">
+                    <h4 class="modal-title">Envoyer la demande</h4>
+                </div>
+            </div>
+            <div class="modal-body">
+                <div class="row" >
+                    <div class="col-md-3">     
+                        <label for="input-1">Demande signée <span class="obligatoire" title="Obligatoire"> *</span>:</label>
+                    </div>
+                    <div class="col-md-6">     
+                        <input id="input-1" name="input-1" type="file" class="file-loading"/>   
+                    </div>  
+                </div>
+            </div>                
+            <div class="modal-footer form-actions">
+                <div class="form-group">
+                    <div class="pull-left">
+                        <button class="btn btn-default btn-sm" type="button" value="Annuler"  data-dismiss="modal"><i class="fa fa-times"></i> Fermer</button>
+                    </div>
+                    <div class="pull-right">
+                        <button class="btn btn-primary btn-sm btn-valider"   data-dismiss="modal"><i class="fa fa-check"></i> valider l'envoi</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<script>
+    $(document).on('ready', function() {
+        $(".file-loading").fileinput({showCaption: true, language: "fr",'showUpload': false});                                    
+        $('.input-group.date').datepicker({format: "dd/mm/yyyy",language: "fr"});
+        $('.chosen-select').chosen({language: "fr"});
+    });
+</script>

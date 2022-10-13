@@ -1,0 +1,101 @@
+<app-header xmlns:skipLocationChange="http://www.w3.org/1999/xhtml"></app-header>
+<div >
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <h4 class="page-head-line">Insertion d'un bon d'entrée</h4>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <p class="fr">Les champs obligatoires sont marqués par un <span class="obligatoire">*</span>.</p>
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <label>Bon d'entrée </label>
+          </div>
+          <form #myForm="ngForm"   ngNativeValidate>
+            <div ngModelGroup="EntryDetails" #entryDetail="ngModelGroup">
+              <div class="panel-body">
+
+                <div class="row " >
+                  <div class="col-md-4">
+                    <label >Numéro de dépense  <span class="obligatoire" title="Obligatoire"> *</span>:</label>
+                  </div>
+                  <div class="col-md-6">
+
+                    <div class="input-group input-group-espacer ">
+                      <input id="numDepense" placeholder="Nouvelle numéro de dépense"
+                             name="numDepense" [(ngModel)]="this.addedEntryDemand.numDepense"   class="form-control"   required type="text" >
+                      <span class="input-group-addon spacer" ></span>
+                      <a id="synchro" class="input-group-addon btn" title="Synchroniser SGIA"><i class="fa fa-refresh"></i></a>
+                    </div>
+                  </div>
+                </div>
+                <div class="row spacer">
+                  <div class="col-md-4">
+                    <label  >Numéro de marché<span class="obligatoire" title="Obligatoire"> *</span>:</label>
+                  </div>
+                  <div class="col-md-6">
+                    <input type="text"  id="numMarcket" placeholder="Nouvelle numéro de marché"
+                           name="numMarcket" [(ngModel)]="this.addedEntryDemand.numMarcket"   class="form-control"   required >
+                  </div>
+                </div>
+                <div class="row spacer">
+                  <div class="col-md-4">
+                    <label >Numéro de bon de commande  <span class="obligatoire" title="Obligatoire"> *</span>:</label>
+                  </div>
+                  <div class="col-md-6">
+                    <input type="text" id="numReceiptOrder" placeholder="Nouvelle numéro de bon de commande"
+                           name="numReceiptOrder" [(ngModel)]="this.addedEntryDemand.numReceiptOrder"   class="form-control"   required >
+                  </div>
+                </div>
+                <div class="row spacer">
+                  <div class="col-md-4">
+                    <label>DAP  <span class="obligatoire" title="Obligatoire"> *</span>:</label>
+                  </div>
+                  <div class="col-md-6">
+                    <input type="text" id="dap" placeholder="Nouvelle numéro de DAP"
+                           name="dap" [(ngModel)]="this.addedEntryDemand.dap"   class="form-control"   required >
+                  </div>
+                </div>
+                <div class="pull-right">
+                  <button class="btn btn-primary btn-sm"   [disabled]="myForm.form.invalid"   alt="Valider" title="Valider" (click)="onSubmit()"> <i class="fa fa-floppy-o"></i> Enregister</button>
+                  <br><br>
+                </div>
+
+
+
+
+
+
+
+
+
+
+
+              </div>
+
+            </div>
+
+          </form>
+          <div class="panel-footer form-actions">
+            <div class="form-group">
+              <div class="pull-right">
+                <button class="btn btn-primary btn-sm" href="details_bon_entree_attente_validation.html"  [disabled]="myForm.form.invalid"   alt="Valider" title="Valider" href="#"> <i class="fa fa-floppy-o"></i> Suite</button>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  $(document).on('ready', function() {
+    $(".file-loading").fileinput({showCaption: false,  language: "fr",'showUpload': false});
+    $('.input-group.date').datepicker({format: "dd/mm/yyyy",language: "fr",enableOnReadonly: true});
+    $('.chosen-select').chosen({language: "fr"});
+  });
+</script>

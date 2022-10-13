@@ -1,0 +1,290 @@
+<app-header xmlns:skipLocationChange="http://www.w3.org/1999/xhtml"></app-header>
+    <div id="content" #content class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h4 class="page-head-line">Détails de la demande de sortie</h4>
+            </div>
+        </div>
+        <div class="row">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <label>Demande de sortie (En instance)</label>
+                </div>
+                <div class="panel-body">
+                    <div class="row ">
+                        <div class="col-md-4">
+                            <label >N° de la demande :</label>
+                            {{this.addedDemand.numDemand}}
+                        </div>
+                        <div class="col-md-4">     
+                            <label >Date de la demande :</label>
+                            {{this.addedDemand.dateAffectation}}
+                        </div>
+                    </div>
+
+
+                    <div class="row ">
+                        <div class="col-md-4">
+                            <label >Entité :</label>
+                            {{this.addedDemand.idEntity.label}}
+                        </div>
+                        <div class="col-md-4">
+                            <label >Bénéficiaire :</label>
+                            {{this.addedDemand.beneficiary}}
+                        </div>
+                    </div>
+                    <div class="row spacer ">
+                        <div class="col-md-12 ">
+                            <label>Produits inventaire</label>
+                            <div class="repeater-viewport panel-table">
+                                <table class="table table-bordered table-striped table-suivi table-matériel table-hover ">
+                                    <table class="table table-bordered table-striped table-suivi table-matériel table-hover ">
+                                    <thead>
+                                        <tr>
+                                            <th id="col_01" class="col-refs col-md-2">Catégorie</th>
+                                            <th id="col_02" class="col-refs col-md-2">Sous Catégorie</th>
+                                            <th id="col_03" class="col-refs col-md-1">Désignation</th>
+                                            <th id="col_04" class="col-refs col-md-1">Quantité demandée</th>
+                                            <th id="col_05" class="col-refs col-md-2">N° d'inventaire</th>
+                                            <th id="col_06" class="col-refs col-md-1">N° de série</th>
+                                            <th id="col_07" class="col-refs col-md-4">Observation</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody  *ngIf="myArrInvproductsBydemand.length!=0">
+                                        <tr class="details_1" *ngFor="let invproduct of myArrInvproductsBydemand">
+                                            <td headers="col_01" >{{invproduct.idProduct.subcategory.categories.categoryName}}</td>
+                                            <td headers="col_02" >{{invproduct.idProduct.subcategory.subcategoryName}}</td>
+                                            <td headers="col_03" >{{invproduct.idProduct.designation}}</td>
+                                            <td headers="col_04"  class="nombre-alignement" > 1</td>
+                                            <td headers="col_01" >{{invproduct.numinv}}</td>
+                                            <td headers="col_01" >{{invproduct.numserie}}</td>
+                                            <td headers="col_05" >{{invproduct.observationSortie}} </td>
+                                            
+                                        </tr>
+                                        
+
+                                    </tbody>
+                                </table> 
+                                </table> 
+                            </div>
+                        </div>
+                    </div>
+
+
+                    
+                    <div class="row spacer ">
+                        <div class="col-md-12 ">
+                            <label>Produits non inventaire</label>
+                            <div class="repeater-viewport panel-table">
+                                <table class="table table-bordered table-striped table-suivi table-matériel table-hover ">
+                                    <table class="table table-bordered table-striped table-suivi table-matériel table-hover ">
+                                    <thead>
+                                        <tr>
+                                            
+
+                                            <th id="col_01" class="col-refs col-md-2">Catégorie</th>
+                                            <th id="col_02" class="col-refs col-md-2">Sous Catégorie </th>
+                                            <th id="col_03" class="col-refs col-md-1">Désignation</th>
+                                            <th id="col_04" class="col-refs col-md-1">Quantité demandée</th>
+                                            <th id="col_05" class="col-refs col-md-2">Observation</th>
+
+                                            
+                                        </tr>
+                                    </thead>
+                                    <tbody >
+                                        <tr class="details_1" *ngFor="let demand of this.addedDemand.affectedProducts; let i = index">
+                                            <td headers="col_01" >
+                                                            <hr>
+                                               -
+                                        </td>
+                                            <td headers="col_02" >
+                                                            <hr>
+                                                            -
+                                                    </td>
+                                            <td headers="col_03" >
+                                                            <hr>
+                                                            {{ demand.noinvdesignation}}
+                                                    </td>
+                                            <td headers="col_04"  class="nombre-alignement">
+                                                                <hr>
+                                                    {{ demand.quantityRequested}}
+                                            </td>
+                                            <td headers="col_05" >
+                                                    <hr>
+                                                    {{ demand.observation}}
+                                                            
+                                                </td>
+                                                
+                                        </tr>
+
+                                    </tbody>
+                                </table> 
+                                </table> 
+                            </div>
+                        </div>
+                    </div>
+
+        </div>                
+    </div>
+</div>
+        <div id="panel_traitement_demande" class="row">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <label>Traiter la demande</label>
+                        </div>
+                        <div class="panel-body">
+                            <form #myForm="ngForm"   ngNativeValidate>
+                                <div ngModelGroup="DemandDetails" #affectedDetail="ngModelGroup">
+
+
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <label for="input-1">Télécharger le bon de demande :</label>
+                                </div>
+                                <div class="col-md-6  file-input-unique">
+                                    <button class="btn btn-xs btn-primary" (click)="makePDF()" title="Télécharger" href="#"><i class="fa fa-download"></i></button>
+                                </div>
+                            </div>
+
+                            <div class="row  spacer">
+                                <div class="col-md-3">
+                                    <label >Date de signature  <span class="obligatoire" title="Obligatoire"> *</span>:</label>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="input-group date">
+                                        <input type="date" name="signDate" id="signDate" [(ngModel)]="this.addedDemand.signDate" class="form-control" placeholder="jj/mm/aaaa">
+                                        <span class="input-group-addon"><i class="fa fa-th"></i></span>
+                                    </div>
+                                </div>
+
+                            </div>
+                            
+
+                                </div>
+                            </form> 
+
+                            <div class="row spacer ">
+                                <div class="col-md-12 ">
+                                    <label>Produits non inventaire</label>
+                                    <div class="repeater-viewport panel-table">
+                                        <table class="table table-bordered table-striped table-suivi table-matériel table-hover ">
+                                            <table class="table table-bordered table-striped table-suivi table-matériel table-hover ">
+                                            <thead>
+                                                <tr>
+                                                    
+        
+                                                    <th id="col_01" class="col-refs col-md-2">Catégorie</th>
+                                                    <th id="col_02" class="col-refs col-md-2">Sous Catégorie </th>
+                                                    <th id="col_03" class="col-refs col-md-1">Désignation</th>
+                                                    <th id="col_04" class="col-refs col-md-1">Quantité demandée</th>
+                                                    <th id="col_05" class="col-refs col-md-2">Observation</th>
+                                                    <th id="col_06" class="col-refs col-medium ">Quantité accordée</th>
+                                                    <th id="col_07" class="col-refs col-medium ">Action</th>
+                                                    
+                                                </tr>
+                                            </thead>
+                                            <tbody >
+                                                <tr class="details_1" *ngFor="let demand of this.addedDemand.affectedProducts; let i = index">
+                                                    <td headers="col_01" >
+                                                                    <hr>
+                                                       -
+                                                </td>
+                                                    <td headers="col_02" >
+                                                                    <hr>
+                                                                    -
+                                                            </td>
+                                                    <td headers="col_03" >
+                                                                    <hr>
+                                                                    {{ demand.noinvdesignation}}
+                                                            </td>
+                                                    <td headers="col_04"  class="nombre-alignement">
+                                                                        <hr>
+                                                            {{ demand.quantityRequested}}
+                                                    </td>
+                                                    <td headers="col_05" >
+                                                            <hr>
+                                                            {{ demand.observation}}
+                                                                    
+                                                        </td>
+                                                        <td headers="col_06" class="nombre-alignement">
+                                                                <hr>
+                                                            <input type="number" name="key_{{i}}" [(ngModel)]="demand.values" id="quantityGaranted" 
+                                                              class="form-control" [placeholder]="demand.quantityGaranted"  [readonly]="readonly" >
+                                                       
+                                                        </td>
+                                                        <td headers="col_07" class="actions ">
+                                                                    
+                                                            <button   class="btn btn-primary" alt="Modifier" title="Modifier" (click)="AddQuantity(demand)"   >
+                                                                Valider
+                                                              </button>
+                                                        </td>
+                                                </tr>
+        
+                                            </tbody>
+                                        </table> 
+                                        </table> 
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="row spacer ">
+                                <div class="col-md-12 ">
+                                    <label>Produits inventaire</label>
+                                    <div class="repeater-viewport panel-table">
+                                        <table class="table table-bordered table-striped table-suivi table-matériel table-hover ">
+                                            <table class="table table-bordered table-striped table-suivi table-matériel table-hover ">
+                                            <thead>
+                                                <tr>
+                                                    <th id="col_01" class="col-refs col-md-2">Catégorie</th>
+                                                    <th id="col_02" class="col-refs col-md-2">Sous Catégorie</th>
+                                                    <th id="col_03" class="col-refs col-md-1">Désignation</th>
+                                                    <th id="col_04" class="col-refs col-md-1">Quantité demandée</th>
+                                                    <th id="col_05" class="col-refs col-md-2">N° d'inventaire</th>
+                                                    <th id="col_06" class="col-refs col-md-1">N° de série</th>
+                                                    <th id="col_07" class="col-refs col-md-4">Observation</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody  *ngIf="myArrInvproductsBydemand.length!=0">
+                                                <tr class="details_1" *ngFor="let invproduct of myArrInvproductsBydemand">
+                                                    <td headers="col_01" >{{invproduct.idProduct.subcategory.categories.categoryName}}</td>
+                                                    <td headers="col_02" >{{invproduct.idProduct.subcategory.subcategoryName}}</td>
+                                                    <td headers="col_03" >{{invproduct.idProduct.designation}}</td>
+                                                    <td headers="col_04"  class="nombre-alignement" > 1</td>
+                                                    <td headers="col_01" >{{invproduct.numinv}}</td>
+                                                    <td headers="col_01" >{{invproduct.numserie}}</td>
+                                                    <td headers="col_05" >{{invproduct.observationSortie}} </td>
+                                                    
+                                                </tr>
+                                                
+        
+                                            </tbody>
+                                        </table> 
+                                        </table> 
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+
+
+                        </div>
+                    </div>
+            <div class="panel-footer form-actions">
+                <div class="form-group">
+                    <div class="pull-right">
+                        <a class="btn btn-primary btn-sm" (click)="DemandTreated()"><i class="fa fa-cogs"></i> Traiter la demande</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        $(document).on('ready', function() {
+            $(".file-loading").fileinput({showCaption: false,  language: "fr",'showUpload': false});
+            $('.input-group.date').datepicker({format: "dd/mm/yyyy",language: "fr"});
+            $('.chosen-select').chosen({language: "fr"});
+        });
+    </script>

@@ -1,0 +1,14 @@
+/*General*/
+body { background:#fff !important; }
+@page { margin: 0; }
+#nav, #header .top-nav, #middle .left-part, #menu, #footer { display:none; }
+#header { height:120px; width:100%; background-position:center; display:none; }
+#middle { width:100%; }
+#page-wrap, .popup-large { width:100%; min-width:100% }
+.affichage, .line-actions, .line-btn , .tabs-nav, .tabs-demandes { display:none; }
+.collapse { display: block; visibility: visible;}
+header {display:none; }
+.navbar, .menu-section, .form-actions, .nav-tabs, .btn {display:none; }
+footer {display:none; }
+.form-group{margin-bottom: 0px;}
+.panel-heading{padding:0px 15px;}

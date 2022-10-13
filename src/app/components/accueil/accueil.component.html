@@ -1,0 +1,65 @@
+<app-header></app-header>
+<div >
+  <div class="container">
+      <div class="row">
+          <div class="col-md-12">
+              <h4 class="page-head-line"><span>Accueil</span> </h4>
+          </div>
+      </div>
+          <div class="row">
+              <div class="col-md-12">
+                  <div class="col-md-6">
+                      <div class="panel panel-default">
+                          <div class="panel-heading">
+                              <label>Demande de sortie</label>
+                          </div>
+                          <div class="panel-body">
+                              <div class="row">
+                                  <div class="padding-10">
+                                      <ul class="list-group">
+                                          <a mat-list-item [routerLink]="'/allDemandAffectationComponent'" class="list-group-item list-group-item-warning">Demandes de sortie en instance : <span id="demandeSortieEnInstance">{{this.EnInstance}}</span></a>
+                                          <a mat-list-item [routerLink]="'/allDemandAffectationComponent'" class="list-group-item list-group-item-danger">Demandes de sortie en attente de livraison : <span id="demandeSortieAttenteLivraison">{{this.EnAttente}}</span></a>
+                                          <a  mat-list-item [routerLink]="'/allDemandAffectationComponent'" class="list-group-item list-group-item-success">Demandes de sortie livrées: <span id="demandeSortieAttenteLivraison">{{this.livrer}}</span></a>
+                                      
+                                        </ul>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+
+
+          <div class="row">
+            <div class="col-md-12">
+                <div class="col-md-6">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <label>Stock en rupture</label>
+                        </div>
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="padding-10">
+                                    <ul class="list-group" *ngFor="let item of this.Ruptureproducts">
+                                        <a mat-list-item [routerLink]="'/allDemandAffectationComponent'" class="list-group-item list-group-item-danger">Le produit :  <span id="demandeSortieAttenteLivraison">{{item.designation}}</span> est en rupture de stock </a>
+                                    
+                                      </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+  </div>
+</div>
+
+<script>
+$(document).on('ready', function() {
+  $(".file-loading").fileinput({showCaption: false,  language: "fr",'showUpload': false});                                    
+  $('.input-group.date').datepicker({format: "dd/mm/yyyy",language: "fr",enableOnReadonly: true});
+  $('.chosen-select').chosen({language: "fr"});
+});
+</script>   

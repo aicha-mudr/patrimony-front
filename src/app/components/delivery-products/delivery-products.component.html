@@ -1,0 +1,356 @@
+<div >
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <h4 class="page-head-line">Insertion d'un bon d'entrée</h4>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <p class="fr">Les champs obligatoires sont marqués par un <span class="obligatoire">*</span>.</p>
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <label>Bon d'entrée </label>
+            </div>
+            <form #myForm="ngForm"    ngNativeValidate>
+              <div ngModelGroup="EntryDetails" #entryDetail="ngModelGroup">
+                <div class="panel-body">
+  
+                  <div class="row " >
+                    <div class="col-md-4">
+                      <label >Numéro de dépense  <span class="obligatoire" title="Obligatoire"> *</span>:</label>
+                    </div>
+                    <div class="col-md-6">
+  
+                      <div class="input-group input-group-espacer ">
+                        <input id="numDepense" placeholder="Nouvelle numéro de dépense"
+                               name="numDepense" [(ngModel)]="this.addedEntryDemand.numDepense"   class="form-control"   required type="text" readonly>
+                        <span class="input-group-addon spacer" ></span>
+                        <a id="synchro" class="input-group-addon btn" title="Synchroniser SGIA"><i class="fa fa-refresh"></i></a>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row spacer">
+                    <div class="col-md-4">
+                      <label  fo="mhe"arc>Numéro de marché<span class="obligatoire" title="Obligatoire"> *</span>:</label>
+                    </div>
+                    <div class="col-md-6">
+                      <input type="text"  id="numMarcket" placeholder="Nouvelle numéro de marché"
+                             name="numMarcket" [(ngModel)]="this.addedEntryDemand.numMarcket"   class="form-control"   required readonly>
+                    </div>
+                  </div>
+                  <div class="row spacer">
+                    <div class="col-md-4">
+                      <label >Numéro de bon de commande  <span class="obligatoire" title="Obligatoire"> *</span>:</label>
+                    </div>
+                    <div class="col-md-6">
+                      <input type="text" id="numReceiptOrder" placeholder="Nouvelle numéro de bon de commande"
+                             name="numReceiptOrder" [(ngModel)]="this.addedEntryDemand.numReceiptOrder"   class="form-control"   required readonly>
+                    </div>
+                  </div>
+                  <div class="row spacer">
+                    <div class="col-md-4">
+                      <label >DAP  <span class="obligatoire" title="Obligatoire"> *</span>:</label>
+                    </div>
+                    <div class="col-md-6">
+                      <input type="text" id="dap" placeholder="Nouvelle numéro de DAP"
+                             name="dap" [(ngModel)]="this.addedEntryDemand.dap"   class="form-control"   required readonly>
+                    </div>
+                  </div>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+                  <div class="row spacer">
+                    <div class="col-md-12">
+                      <div class="notice-board">
+                        <div class="panel panel-default">
+                          <div class="panel-heading">
+                            <label>Bon de livraison</label>
+                          </div>
+                          <div class="panel-body">
+  
+                            <div class="row ">
+                              <div class="col-md-4">
+                                <label >Numéro de bon de livraison  <span class="obligatoire" title="Obligatoire"> *</span>:</label>
+                              </div>
+                              <div class="col-md-6">
+                                <input type="text"  id="numDeliveryReceipt" placeholder="Nouvelle numéro de bon de livraison"
+                                       name="numDeliveryReceipt" [(ngModel)]="this.myDeliveryReceipt.numDeliveryReceipt"   class="form-control"   required  readonly>
+                              </div>
+                            </div>
+                            <div class="row spacer">
+                              <div class="col-md-4">
+                                <label >Date de bon de livraison <span class="obligatoire" title="Obligatoire"> *</span>:</label>
+                              </div>
+                              <div class="col-md-6">
+                                <div class="input-group date">
+                                  <input name="date_ods" type="date"  id="dateDelivery"
+                                         name="dateDelivery" [(ngModel)]="this.myDeliveryReceipt.dateDelivery" class="form-control" placeholder="jj/mm/aaaa" readonly/>
+                                  <span class="input-group-addon"><i class="fa fa-th"></i></span>
+                                </div>
+                              </div>
+                            </div>
+  
+                            <div class="row spacer">
+                              <div class="col-md-4">
+                                <label >Fournisseur <span class="obligatoire" title="Obligatoire"> *</span>:</label>
+                              </div>
+                              <div class="col-md-6">
+                                <div class="input-group date">
+                                  <input name="Fournisseur " type="text"  id="VendorDelivery"
+                                         name="Fournisseur " [(ngModel)]="this.myDeliveryReceipt.vendor" class="form-control" placeholder="Fournisseur" readonly/>
+                                </div>
+                              </div>
+                            </div>
+  
+  
+                            <div class="row spacer">
+                              <div class="col-md-12">
+                                <div class="notice-board">
+                                  <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                      <label>Produits reçus</label>
+                                    </div>
+                                    <div class="panel-body">
+                                      <label>Produits non inventaire</label>
+                                      <div class="repeater-viewport panel-table">
+  
+                                        <table class="table table-bordered table-striped table-suivi table-matériel table-hover">
+                                          <thead>
+                                          <tr>
+                                            <th id="col_01" class="col-refs col-md-2">Catégorie</th>
+                                            <th id="col_02" class="col-refs col-md-2">Sous Catégorie</th>
+                                            <th id="col_03" class="col-refs col-md-2">Désignation</th>
+                                            <th id="col_04" class="col-refs col-md-2">Quantité reçue</th>
+                                            <th id="col_06" class="col-refs col-md-4">Observation</th>
+                                            <th id="col_07" class="actions col-md-2 ">Actions</th>
+                                          </tr>
+                                          </thead>
+                                          <tbody >
+  
+                                            <tr class="details_2" *ngFor="let Deliverynoinv of fitredNoinv">
+                                              <td headers="col_01">{{Deliverynoinv.idProductnv.idProduct.subcategory.categories.categoryName}}</td>
+                                              <td headers="col_02">{{Deliverynoinv.idProductnv.idProduct.subcategory.subcategoryName}}</td>
+                                              <td headers="col_03">{{Deliverynoinv.idProductnv.idProduct.designation}}</td>
+                                              <td headers="col_04" class="nombre-alignement">{{Deliverynoinv.quantity}}</td>
+                                              <td headers="col_06">{{Deliverynoinv.observation}}</td>
+                                              
+                                            </tr>
+  
+                                          </tbody>
+  
+                                          <tfoot>
+                                          <tr>
+  
+  
+                                            <td headers="col_01">
+                                              <mat-form-field   >
+  
+                                                <mat-select id="category" class="form-control" #categoryId name="categoryId" [(ngModel)]="this.categorySelected2"  
+                                                (ngModelChange)="onCategoryselected($event)" >
+                                                  <mat-option  [value]="option.id" *ngFor="let option of categories">
+                                                    {{ option.categoryName}}
+                                                  </mat-option>
+                                                </mat-select>
+                                              </mat-form-field>
+                                            </td>
+                                            <td headers="col_02">
+                                              <mat-form-field   >
+                                                <mat-select class="form-control"  id="subCategory" #subCategoryId name="subCategoryId"  [(ngModel)]="this.addedProduct2.subcategory" 
+                                                    (selectionChange)="changeOption($event.value)"   (ngModelChange)="onDesignationselected($event)" >
+                                                  <mat-option  [value]="option.id"  *ngFor="let option of filtredSubcategories" >
+                                                    {{  option.subcategoryName }}
+                                                  </mat-option>
+                                                </mat-select>
+                                              </mat-form-field>
+                                            </td>
+                                            <td headers="col_03">
+                                              <mat-form-field   >
+                                                <mat-select class="form-control" id="designation"  #designation name="designation" [(ngModel)]="this.addedProduct2.designation"    >
+                                                  <mat-option  [value]="option.id" *ngFor="let option of filtredProducts ">
+                                                    {{  option.designation }}
+                                                  </mat-option>
+                                                </mat-select>
+                                              </mat-form-field>
+                                            </td>
+                                            
+                                            <td   headers="col_04">
+                                              <input type="number" id="Quantity" placeholder="Quantity" #Quantity
+                                                     name="Quantity" [(ngModel)]="this.addedDeliverynoinv.quantity"  class="form-control"   >
+                                            </td>
+  
+                                            
+                                            <td headers="col_06">
+                                                <textarea  id="observation" placeholder="observation" #observation
+                                                     name="observation"  [(ngModel)]="this.addedDeliverynoinv.observation"   class="form-control" ></textarea>
+  
+                                            </td>
+                                            <td headers="col_07" class="actions ">
+                                                                      
+                                              <button   class="btn btn-primary" alt="Modifier" title="Modifier" (click)="onSubmitProductReceipt()" (click) = "categoryId.value = ''" 
+                                               (click) = "Quantity.value = ''" (click) = "observation.value = ''" (click) = "designation.value = ''" (click) = "subCategoryId.value = ''">
+                                                  Valider
+                                                </button>
+                                          </td>
+                                          </tr>
+                                          </tfoot>
+                                        </table>
+  
+                                      </div>
+                                    </div>
+  
+  
+  
+  
+                                    <div class="panel-body">
+                                      <label>Produits inventaire</label>
+                                      <div class="repeater-viewport panel-table">
+  
+                                        <table class="table table-bordered table-striped table-suivi table-matériel table-hover">
+                                          <thead>
+                                          <tr>
+                                            <th id="col_01" class="col-refs col-md-2">Catégorie</th>
+                                            <th id="col_02" class="col-refs col-md-2">Sous Catégorie</th>
+                                            <th id="col_03" class="col-refs col-md-2">Désignation</th>
+                                            <th id="col_05" class="col-refs col-md-2">num inventaire</th>
+                                            <th id="col_08" class="col-refs col-md-2">num série</th>
+                                            <th id="col_06" class="col-refs col-md-4">Observation</th>
+                                            <th id="col_07" class="actions col-md-2 ">Actions</th>
+                                          </tr>
+                                          </thead>
+                                          <tbody >
+  
+                                          <tr class="details_2" *ngFor="let Invproduct of InvproductsUnique">
+                                            <td headers="col_01" >{{Invproduct.idProduct.subcategory.categories.categoryName}}</td>
+                                            <td headers="col_02">{{Invproduct.idProduct.subcategory.subcategoryName}}</td>
+                                            <td headers="col_03">{{Invproduct.idProduct.designation}}</td>
+                                            <td headers="col_05">{{Invproduct.numinv}}</td>
+                                            <td headers="col_05">{{Invproduct.numserie}}</td>
+                                            <td headers="col_06">{{Invproduct.observation}}</td>
+                                            <td headers="col_07" class="actions ">
+                                              <a class="btn btn-xs btn-primary" alt="Modifier" title="Modifier"  onclick="$('.details_2').hide();$('.modif_2').show();">
+                                                <i class="fa fa-pencil-square-o"></i>
+                                              </a>
+                                              <a class="btn btn-xs btn-primary" alt="Supprimer" title="Supprimer" >
+                                                <i class="fa fa-trash-o"></i>
+                                              </a>
+                                            </td>
+                                          </tr>
+  
+                                          </tbody>
+  
+                                          <tfoot>
+                                          <tr>
+  
+  
+                                            <td headers="col_01">
+                                              <mat-form-field   >
+  
+                                                <mat-select id="category2" class="form-control" #categoryId2 name="categoryId" [(ngModel)]="this.categorySelected"  (ngModelChange)="onCategoryselected2($event)" >
+                                                  <mat-option  [value]="option.id" *ngFor="let option of categories">
+                                                    {{ option.categoryName}}
+                                                  </mat-option>
+                                                </mat-select>
+                                              </mat-form-field>
+                                            </td>
+                                            <td headers="col_02">
+                                              <mat-form-field   >
+                                                <mat-select class="form-control" #subCategory2  id="subCategory2" name="subCategoryId2"  [(ngModel)]="this.addedProduct.subcategory" (selectionChange)="changeOption($event.value)"   (ngModelChange)="onDesignationselected($event)">
+                                                  <mat-option  [value]="option.id"  *ngFor="let option of filtredSubcategories" >
+                                                    {{  option.subcategoryName }}
+                                                  </mat-option>
+                                                </mat-select>
+                                              </mat-form-field>
+                                            </td>
+                                            <td headers="col_03">
+                                              <mat-form-field   >
+                                                <mat-select class="form-control" #designation2 id="designation2" name="designation" [(ngModel)]="this.addedProduct.designation"   >
+                                                  <mat-option  [value]="option.id" *ngFor="let option of filtredProducts " >
+                                                    {{  option.designation }}
+                                                  </mat-option>
+                                                </mat-select>
+                                              </mat-form-field>
+                                            </td>
+  
+                                            <td headers="col_05">
+                                              <input type="text" id="numinv" #numinv placeholder="numinv"
+                                                     [(ngModel)]="this.addedInvproduct.numinv"
+                                                     name="numinv"   class="form-control"  >
+  
+                                            </td>
+                                            <td headers="col_05">
+                                              <input type="text" id="numserie" #numserie placeholder="numserie"
+                                                     name="numserie"   [(ngModel)]="this.addedInvproduct.numserie"  class="form-control"  >
+  
+                                            </td>
+                                            <td headers="col_06">
+                                                <textarea  id="observation2" #observation2 placeholder="observation"
+                                                     name="observation"  [(ngModel)]="this.addedInvproduct.observation"   class="form-control" ></textarea>
+  
+                                            </td>
+                                            <td headers="col_07" class="actions ">
+                                                                      
+                                              <button   class="btn btn-primary" alt="Modifier" title="Modifier" (click)="onSubmitProductReceipt()" (click) = "observation2.value = ''"
+                                               (click) = "categoryId2.value = ''" (click) = "designation2.value = ''" (click) = "numinv.value = ''" (click) = "subCategory2.value = ''" (click) = "numserie.value = ''">
+                                                  Valider
+                                                </button>
+                                          </td>
+                                          </tr>
+                                          </tfoot>
+                                        </table>
+  
+                                      </div>
+                                    </div>
+                                  </div>
+                                  
+                                </div>
+  
+                              </div>
+  
+                            </div>
+  
+                          </div>
+  
+  
+  
+                        </div>
+  
+                      </div>
+  
+                    </div>
+  
+                  </div>
+  
+                </div>
+  
+              </div>
+  
+            </form>
+            <div class="panel-footer form-actions">
+                <div class="form-group">
+                    <div class="pull-right">
+                      <button class="btn btn-primary btn-sm" href="details_bon_entree_attente_validation.html"  [disabled]="myForm.form.invalid"   alt="Valider" (click)="next()" title="Valider" href="#"> <i class="fa fa-floppy-o"></i> Suite</button>
+      
+                    </div>
+                  </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <script>
+    $(document).on('ready', function() {
+      $(".file-loading").fileinput({showCaption: false,  language: "fr",'showUpload': false});
+      $('.input-group.date').datepicker({format: "dd/mm/yyyy",language: "fr",enableOnReadonly: true});
+      $('.chosen-select').chosen({language: "fr"});
+    });
+  </script>

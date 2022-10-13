@@ -1,0 +1,85 @@
+<app-header xmlns:skipLocationChange="http://www.w3.org/1999/xhtml"></app-header>
+<div >
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <h4 class="page-head-line">Bons d'entrée en attente de validation</h4>
+      </div>
+    </div>
+    
+
+    <div class="row">
+      <div class="col-md-12">
+        <div class="tab-content">
+          <div id="tous" class="tab-pane fade in active">
+            <div class="panel-table">
+              <div class="repeater-header">
+                <!--Debut Pagnination top-->
+              <pagination-controls  (pageChange)="p=$event"></pagination-controls>
+
+              <!--Fin Pagnination top-->
+              </div>
+
+              <div class="repeater-viewport">
+                <table class="table table-bordered table-striped table-suivi table-contrats table-hover">
+                  <thead>
+                  <tr    >
+                    <th id="col_01" class="col-refs col-md-2" >N° de dépense</th>
+
+                    <th id="col_03" class="col-refs col-md-2" ><div>Date de la demande</div></th>
+                    <th id="col_04" class="col-refs col-md-2" ><div>Etat la demande</div></th>
+                    <th id="col_05" class="actions col-md-1" ><div>Actions</div></th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <tr *ngFor="let entry of EntryDemands | orderBy: key : reverse |paginate:{itemsPerPage:6, currentPage:p};">
+
+                    <td headers="col_01" >
+                      <div>{{entry.numDepense}}</div>
+                    </td>
+
+                    <td headers="col_03" >
+                      <div>{{entry.dateRequest}}</div>
+                    </td>
+                    <td headers="col_04" >
+                      <div>{{entry.state.state}}</div>
+                    </td>
+
+                    <td headers="col_05"  class="actions">
+                      <a *ngIf="entry.state.id !== 3" id="editEntry" class="btn btn-xs btn-primary"  style="margin:5px;" alt="Modifier" title="Modifier" (click)="editEntry(entry)">
+
+                        <i class="fa fa-pencil-square-o"></i>
+                      </a>
+                      <a class="btn btn-primary btn-xs"  title="Voir le détail" (click)="next(entry)"> <span class="fa fa-search"></span>
+                   </a>
+                    </td>
+
+                  </tbody>
+                </table>
+              </div>
+
+              <div class="repeater-footer">
+
+                <div class="repeater-footer-right">
+                 <!--Debut Pagnination top-->
+              <pagination-controls  (pageChange)="p=$event"></pagination-controls>
+
+              <!--Fin Pagnination top-->
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  $(document).on('ready', function() {
+    $(".file-loading").fileinput({showCaption: false, language: "fr",'showUpload': false});
+    $('.input-group.date').datepicker({format: "dd/mm/yyyy",language: "fr"});
+    $('.chosen-select').chosen({language: "fr"});
+  });
+</script>

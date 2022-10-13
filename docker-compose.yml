@@ -1,0 +1,9 @@
+version: "3.9"  
+services:
+  web:
+    build: ./
+    container_name: patrimony-container1
+    ports:
+      - "4200:4200"
+    stdin_open : true
+    tty : true

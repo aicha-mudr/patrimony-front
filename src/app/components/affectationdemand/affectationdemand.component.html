@@ -1,0 +1,291 @@
+<div >
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <br><br><br>
+                <h4 class="page-head-line">Demande de sortie</h4>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <p class="fr">Les champs obligatoires sont marqués par un <span class="obligatoire">*</span>.</p>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <label>Demande de sortie</label>
+                    </div>
+                    <form #myForm="ngForm"   ngNativeValidate>
+                        <div ngModelGroup="DemandDetails" #entryDetail="ngModelGroup">
+                    <div class="panel-body">   
+                        <div class="row spacer">
+                            <div class="col-md-3">
+                                <label for="numBD">N° de la demande <span class="obligatoire" title="Obligatoire"> *</span>:</label>
+                            </div>
+                            <div class="col-md-3">     
+                                <input [(ngModel)]="this.addedDemand.numDemand" name="numDemand" type="text" id="numBD" class="form-control " [readonly]="readonly">
+                            </div>
+                        </div>
+                        <div class="row spacer">
+                            <div class="col-md-3">
+                                <label >Date de la demande <span class="obligatoire" title="Obligatoire"> *</span>:</label>
+                            </div>
+                            <div class="col-md-6">     
+                                <div class="input-group date">
+                                    <input [(ngModel)]="this.addedDemand.dateAffectation" name="dateAffectation" id="dateAffectation" type="date"  class="form-control"  placeholder="jj/mm/aaaa" [readonly]="readonly"/>
+                                    <span class="input-group-addon"><i class="fa fa-th"></i></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row spacer">                        
+                            <div class="col-md-3">
+                                <label for="entite">
+                                    Entité <span class="obligatoire" title="Obligatoire">*</span> :
+                                </label>         
+                            </div>                
+                            <div class="col-md-6">
+                                
+                                <mat-form-field   >
+                                    <mat-select class="form-control"  id="entite" name="idEntity"  [(ngModel)]="this.addedDemand.idEntity"    required>
+                                      <mat-option  [value]="option.id"  *ngFor="let option of entitytables" [readonly]="readonly" >
+                                        {{  option.label }}
+                                      </mat-option>
+                                    </mat-select>
+                                  </mat-form-field>
+                            </div>
+                        </div>
+                        <div class="row spacer">
+                            <div class="col-md-3">
+                                <label for="beneficiaire">Bénéficiaire <span class="obligatoire" title="Obligatoire"> *</span>:</label>
+                            </div>
+                            <div class="col-md-3">
+                                <input [(ngModel)]="this.addedDemand.beneficiary" name="beneficiary" type="text" id="beneficiary" #beneficiary class="form-control " required [readonly]="readonly">
+                            </div>
+                        </div>
+
+                        <div class="pull-right" *ngIf="!display">
+                            <button class="btn btn-primary btn-sm"   [disabled]="myForm.form.invalid"   alt="Valider" title="Valider" 
+                             (click)="onSubmit()"> <i class="fa fa-floppy-o"></i> Enregister</button>
+                            <br><br>
+                          </div>
+
+
+                        <div class="row spacer" *ngIf="display">
+                            <div class="col-md-12">
+                                <div class="notice-board">
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading">
+                                            <label>Produits demandés</label>
+                                        </div>
+                                        <div class="panel-body">
+                                            <label>Produits non inventaire</label>
+                                            <div class="repeater-viewport panel-table">
+                                                <table class="table table-bordered table-striped table-suivi table-matériel table-hover">
+                                                    <thead>
+                                                        <tr>
+                                                            <th id="col_01" class="col-refs col-md-2">Catégorie</th>
+                                                            <th id="col_02" class="col-refs col-md-2">Sous Catégorie</th>
+                                                            <th id="col_03" class="col-refs col-md-2">Désignation</th>
+                                                            <th id="col_04" class="col-refs col-md-2">Quantité demandée</th>
+                                                            <th id="col_05" class="col-refs col-md-2">Observation</th>
+                                                            <th id="col_06" class="actions col-md-1 ">Actions</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr class="details_1" *ngFor="let demand of this.myArrfitredProd; let i = index">
+                                                            <td headers="col_01" >
+                                                               -
+                                                        </td>
+                                                            <td headers="col_02" >
+                                                                            -
+                                                                    </td>
+                                                            <td headers="col_03" >
+                                                                                {{ demand.noinvdesignation}}
+                                                                            
+                                                                    </td>
+                                                            <td headers="col_04"  class="nombre-alignement" readonly="true">
+                                                                    {{ demand.quantityRequested}}
+                                                            </td>
+                                                            <td headers="col_05" >
+                                                                    <hr>
+                                                                    {{ demand.observation}}
+                                                                            
+                                                                </td>
+                                                                <td headers="col_06" >
+                                                                    
+                                                                            
+                                                                </td>
+                                                               
+                                                        </tr>
+                
+                                                    </tbody>
+                                                    <tfoot>
+                                                        <tr>
+                                                            <td headers="col_01">
+                                                                <mat-form-field   >
+
+                                                                    <mat-select id="category" #category class="form-control" name="categoryId" [(ngModel)]="this.categorySelected"  (ngModelChange)="onCategoryselected($event)" >
+                                                                      <mat-option  [value]="option.id" *ngFor="let option of categories">
+                                                                        {{ option.categoryName}}
+                                                                      </mat-option>
+                                                                    </mat-select>
+                                                                  </mat-form-field>
+                                                            </td>
+                                                            <td headers="col_02">
+                                                                <mat-form-field   >
+                                                                    <mat-select class="form-control" #subCategory id="subCategory" name="subCategoryId"  [(ngModel)]="this.addedProduct.subcategory" (selectionChange)="changeOption($event.value)" (ngModelChange)="onDesignationselected($event)"  >
+                                                                      <mat-option  [value]="option.id"  *ngFor="let option of filtredSubcategories" >
+                                                                        {{  option.subcategoryName }}
+                                                                      </mat-option>
+                                                                    </mat-select>
+                                                                  </mat-form-field>
+                                                            </td>
+                                                            <td headers="col_03">
+                                                                <mat-form-field   >
+                                                                    <mat-select class="form-control" id="designation" #designation name="designation" [(ngModel)]="this.addedProduct.designation"    >
+                                                                      <mat-option  [value]="option.id" *ngFor="let option of filtredProducts ">
+                                                                        {{  option.designation }}
+                                                                      </mat-option>
+                                                                    </mat-select>
+                                                                  </mat-form-field>
+                                                            </td>
+                                                            <td headers="col_04"><input type="number" id="quantityRequested" #quantityRequested placeholder="quantity Requested"
+                                                                [(ngModel)]="this.addedProductaffected.quantityRequested"
+                                                                name="quantityRequested"   class="form-control" /></td>
+
+                                                            <td headers="col_05">
+                                                                <textarea class="form-control" id="observation" placeholder="observation" #observation
+                                                                [(ngModel)]="this.addedProductaffected.observation"
+                                                                name="observation" ></textarea>
+                                                            </td>                                           
+                                                            <td headers="col_06" class="actions ">
+                                                                <a class="btn btn-primary" alt="Modifier" title="Modifier" (click)="onSubmitProductaffected()" (click) = "category.value = ''"
+                                                                (click) = "subCategory.value = ''" (click) = "designation.value = ''" (click) = "quantityRequested.value = ''" (click) = "observation.value = ''">
+                                                                    Ajouter
+                                                                </a>    
+                                                            </td>
+                                                        </tr>
+                                                    </tfoot>
+                                                </table>                                                                              
+                                            </div>
+                                        </div>  
+
+
+                                        <div class="panel-body">
+                                            <label>Produits inventaire</label>
+                                            <div class="repeater-viewport panel-table">
+                                                <table class="table table-bordered table-striped table-suivi table-matériel table-hover">
+                                                    <thead>
+                                                        <tr>
+                                                            <th id="col_01" class="col-refs col-md-2">Catégorie</th>
+                                                            <th id="col_02" class="col-refs col-md-2">Sous Catégorie</th>
+                                                            <th id="col_03" class="col-refs col-md-2">Désignation</th>
+                                                            <th id="col_04" class="col-refs col-md-2">Quantité demandée</th>
+                                                            <th id="col_05" class="col-refs col-md-2">Observation</th>
+                                                            <th id="col_06" class="actions col-md-1 ">Actions</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody  >
+                                                        <tr class="details_1" *ngFor="let invproduct of myArrInvproductsBydemand">
+                                                            <td headers="col_01" >{{invproduct.idProduct.subcategory.categories.categoryName}}</td>
+                                                            <td headers="col_02" >{{invproduct.idProduct.subcategory.subcategoryName}}</td>
+                                                            <td headers="col_03" >{{invproduct.idProduct.designation}}</td>
+                                                            <td headers="col_04"  class="nombre-alignement" > 1</td>
+                                                            <td headers="col_05" >{{invproduct.observationSortie}} </td>
+                                                            <td headers="col_06" class="actions " >
+                                                                <a class="btn btn-xs btn-primary" alt="Modifier" title="Modifier" onclick="$('.details_1').hide();$('.modif_1').show();">
+                                                                    <i class="fa fa-pencil-square-o"></i>
+                                                                </a>                                                
+                                                                <a class="btn btn-xs btn-primary" alt="Supprimer" title="Supprimer" >
+                                                                    <i class="fa fa-trash-o"></i>
+                                                                </a>
+                                                            </td>
+                                                        </tr>
+                                                        
+
+                                                    </tbody>
+                                                    <tfoot>
+                                                        <tr>
+                                                            <td headers="col_01">
+                                                                <mat-form-field   >
+
+                                                                    <mat-select id="category" class="form-control" name="categoryId" #category2 [(ngModel)]="this.categorySelected2"  (ngModelChange)="onCategoryselected2($event)" >
+                                                                      <mat-option  [value]="option.id" *ngFor="let option of categories">
+                                                                        {{ option.categoryName}}
+                                                                      </mat-option>
+                                                                    </mat-select>
+                                                                  </mat-form-field>
+                                                            </td>
+                                                            <td headers="col_02">
+                                                                <mat-form-field   >
+                                                                    <mat-select class="form-control"  id="subCategory" #subCategory2 name="subCategoryId"  [(ngModel)]="this.addedProduct2.subcategory" (selectionChange)="changeOption($event.value)" (ngModelChange)="onDesignationselected($event)"  >
+                                                                      <mat-option  [value]="option.id"  *ngFor="let option of filtredSubcategories" >
+                                                                        {{  option.subcategoryName }}
+                                                                      </mat-option>
+                                                                    </mat-select>
+                                                                  </mat-form-field>
+                                                            </td>
+                                                            <td headers="col_03">
+                                                                <mat-form-field   >
+                                                                    <mat-select class="form-control" id="designation" #designation2 name="designation" [(ngModel)]="this.addedProduct2.designation"    >
+                                                                      <mat-option  [value]="option.id" *ngFor="let option of filtredProducts ">
+                                                                        {{  option.designation }}
+                                                                      </mat-option>
+                                                                    </mat-select>
+                                                                  </mat-form-field>
+                                                            </td>
+                                                            <td headers="col_04">1</td>
+
+                                                            <td headers="col_05">
+                                                                <textarea class="form-control" id="observation" #observation2 placeholder="observation"
+                                                                [(ngModel)]="this.addedProductaffected2.observation"
+                                                                name="observation" ></textarea>
+                                                            </td>                                           
+                                                            <td headers="col_06" class="actions ">
+                                                                <a class="btn btn-primary" alt="Modifier" title="Modifier" (click)="onSubmitProductaffected()" (click) = "category2.value = ''"
+                                                                (click) = "subCategory2.value = ''" (click) = "designation2.value = ''"  (click) = "observation2.value = ''">
+                                                                    Ajouter
+                                                                </a>    
+                                                            </td>
+                                                        </tr>
+                                                    </tfoot>
+                                                </table>                                                                              
+                                            </div>
+                                        </div>  
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                        </div>
+                    </form>
+                    <div class="panel-footer form-actions">
+                        <div class="form-group">
+                            <div class="pull-left">
+                                <button class="btn btn-default btn-sm" type="button" value="Annuler"><i class="fa fa-angle-double-left"></i> Retour</button>
+                            </div>
+                            <div class="pull-right"  *ngIf="display">
+                                <button class="btn btn-primary btn-sm" (click)="Enregister()" [disabled]="myForm.form.invalid"><i class="fa fa-floppy-o"></i> Enregister</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>  
+            </div>  
+        </div>        
+    </div>
+</div>
+<script>
+    $(document).on('ready', function() {
+        $(".file-loading").fileinput({showCaption: false,  language: "fr",'showUpload': false});                                    
+        $('.input-group.date').datepicker({format: "dd/mm/yyyy",language: "fr"});
+        $('.chosen-select').chosen({language: "fr"});
+
+        $('#type_demande').on('change', function(){
+            if($(this).find("option:selected").attr('value') == 1){
+                $('.demande_interne').show();
+                $('.demande_externe').hide();
+            }else{
+                $('.demande_interne').hide();
+                $('.demande_externe').show();
+            }
+        });
+    });
+</script>

@@ -1,0 +1,225 @@
+<!-- MENU SECTION END-->
+<app-header xmlns:skipLocationChange="http://www.w3.org/1999/xhtml"></app-header>
+<div >
+  <div class="container">
+    <div id="bloc-loader"><div class="loader">@@CHARGEMENT@@ </div></div>
+
+    <div class="row">
+      <div class="col-md-12">
+        <p></p>
+        <h4 class="page-head-line">Catégories</h4>
+      </div>
+    </div>
+    
+    <div class="repeater-footer-left">
+      <a data-toggle="modal" class="btn btn-primary btn-sm" data-target="#modal_modifier2" onclick="initModal('-1','','','-1','1');clearModal();"><i class="fa fa-plus"></i> Ajouter</a>
+      <app-add-subcategory></app-add-subcategory>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="tab-content">
+          <div id="tous" class="tab-pane fade in active">
+            <div id="ctl0_CONTENU_PAGE_ctl0_panelResultat" class="panel-table">
+              <div class="repeater-header">
+                <div class="repeater-header-left">
+                  <div id="ctl0_CONTENU_PAGE_ctl0_resultNumberPanel" class="repeater-header-title" style="display:block;">Nombre de résultats : <span id="ctl0_CONTENU_PAGE_ctl0_nombreElement">{{subcategories.length}}</span></div>
+                </div>
+                <div id="ctl0_CONTENU_PAGE_ctl0_panelTop" class="repeater-header-right">
+                  <!--Debut Pagnination top-->
+                  <pagination-controls  (pageChange)="p=$event"></pagination-controls>
+
+                  <!--Fin Pagnination top-->
+                </div>
+              </div>
+              <div class="repeater-viewport">
+
+
+                <table   class="table table-bordered table-striped table-suivi table-ref table-hover">
+                  <thead>
+                  <tr>
+                    <th id="col_01" class="col-refs col-md-5">
+                      <a id="ctl0_CONTENU_PAGE_ctl0_repeaterResult_ctl0_ctl0" (click)="sort('subcategoryName')" title="Trier par catégorie" href="javascript:;//ctl0_CONTENU_PAGE_ctl0_repeaterResult_ctl0_ctl0">
+                        Catégorie <i class="fa fa-sort"></i>
+
+                      </a>
+                      <div >
+                        <input name="subcategoryName" [(ngModel)]="subcategoryName" (ngModelChange)="SearchSubCateg()" type="text" >
+                      </div>
+                    </th>
+                    <th id="col_02" class="col-refs col-md-6">
+                      <a id="ctl0_CONTENU_PAGE_ctl0_repeaterResult_ctl0_ctl1" (click)="sort('categoryName')" title="Trier par catégorie parent" href="javascript:;//ctl0_CONTENU_PAGE_ctl0_repeaterResult_ctl0_ctl1">
+                        Catégorie parent <i class="fa fa-sort"></i>
+
+                      </a>
+                      <div >
+                        <input name="categoryName" [(ngModel)]="categoryName" (ngModelChange)="SearchCateg()" type="text" >
+                      </div>
+                    </th>
+                    <th id="col_03" class="actions col-md-1">Actions</th>
+                  </tr>
+                  </thead>
+
+                  <tbody>
+
+
+
+                  <tr  *ngFor="let subcategory of subcategories| orderBy: key : reverse |paginate:{itemsPerPage:6, currentPage:p};">
+
+                    <td headers="col_01">
+                      <div>
+                        <div>{{subcategory.subcategoryName}}</div>
+                      </div>
+                    </td>
+                    <td headers="col_02">
+                      <div >
+                        <div>{{subcategory.categories.categoryName}}</div>
+                      </div>
+                    </td>
+                    <td headers="col_03  "><div >
+                      <a class="btn btn-primary btn-xs" data-toggle="modal"  data-target="#modal_modifier"  (click)="editSubcategory(subcategory)"   title="Modifier" > <span class="fa fa-pencil"></span>
+                      </a>
+
+                      <a id="ctl0_CONTENU_PAGE_ctl0_repeaterResult_ctl50_ctl1" class="btn btn-xs btn-primary" alt="Supprimer" title="Supprimer" (click)=" deleteSubcategory(subcategory);" style="margin:5px;" href="javascript:;//ctl0_CONTENU_PAGE_ctl0_repeaterResult_ctl50_ctl1">
+
+
+
+
+                        <i class="fa fa-trash-o"></i>
+                      </a>
+                    </div>
+                    </td>
+
+                  </tr>
+
+                  </tbody>
+
+                </table>
+
+              </div>
+              <div class="repeater-footer">
+                
+                <div id="ctl0_CONTENU_PAGE_ctl0_panelBottom" class="repeater-header-right">
+                  <!--Debut Pagnination Bottom-->
+                  <pagination-controls  (pageChange)="p=$event"></pagination-controls>
+                  <br><br><br>
+                  <!--Fin Pagnination Bottom-->
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+  </div>
+
+</div>
+
+<script>
+  $(document).on('ready', function() {
+    $(".file-loading").fileinput({showCaption: false,  language: "fr",'showUpload': false});
+    $('.input-group.date').datepicker({format: "dd/mm/yyyy",language: "fr",enableOnReadonly: true});
+    $('.chosen-select').chosen({language: "fr"});
+  });
+</script>
+
+
+<div id="modal_modifier" class="modal fade modal-medium" role="dialog" tabindex="-1" aria-hidden="true" style="display: none;">
+
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <form (ngSubmit)="onSubmit()" #myForm="ngForm"   ngNativeValidate>
+      <div ngModelGroup="subcategoryDetails" #subcategoryDetail="ngModelGroup">
+        <div class="modal-content">
+          <div class="modal-header modal-header-form">
+            <button type="button" class="close" data-dismiss="modal">×</button>
+            {{myForm.form.invalid}}
+            <div class="pull-left">
+              <h4 class="modal-title">Catégorie</h4>
+            </div>
+          </div>
+          <div id="ctl0_CONTENU_PAGE_ctl0_panelInfoModal" class="modal-body">
+            <div class="row">
+              <div class="col-md-3">
+                <label for="categoryName">Sous Catégorie <span class="obligatoire" title="Obligatoire"> *</span> :</label>
+              </div>
+              <div class="col-md-6">
+                <input type="text" id="categoryName" placeholder="Nouvelle sous catégorie"
+                       name="subcategoryName" [(ngModel)]="this.updatedSubcategory.subcategoryName"   class="form-control"   required ></div>
+
+            </div>
+
+            <div class="row spacer">
+              <div class="col-md-3">
+                <label >
+                  Catégorie <span class="obligatoire" title="Obligatoire"> *</span> :
+                </label>
+
+              </div>
+              <div class="col-md-6">
+                <mat-form-field   >
+                  <mat-select class="form-control" id="category" name="categoryId" [(ngModel)]="this.mySubcategory.categories" required>
+                    <mat-option  [value]="option.id" *ngFor="let option of categories">
+                      {{ option.categoryName}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+
+            </div>
+
+            <div class="row spacer" id="divDesactiverNumInventory">
+              <div class="col-md-3">
+                <label>Avec/Sans num inventaire<span class="obligatoire" title="Obligatoire">*</span>:</label>
+              </div>
+              <div class="col-md-1" style="display:flex; flex-direction: row; justify-content: center; align-items: center" >
+            <span  *ngFor="let option of options" style="display:flex; flex-direction: row; justify-content: center; align-items: center">
+            <input  type="radio" id="{{option.id}}" value="{{option.value}}" name="inventory" [ngModel]="this.mySubcategory.inventory" required>
+            <label >{{option.val}}</label>
+               </span>
+              </div>
+
+            </div>
+            <div class="row spacer" id="divDesactiverNumSerie">
+              <div class="col-md-3">
+                <label>Avec/Sans num série <span class="obligatoire" title="Obligatoire"> *</span> :</label>
+              </div>
+              <div class="col-md-1" style="display:flex; flex-direction: row; justify-content: center; align-items: center">
+            <span  *ngFor="let option of options" style="display:flex; flex-direction: row; justify-content: center; align-items: center">
+            <input  type="radio" id="{{option.id+2}}" value="{{option.value}}" name="serie" [ngModel]="this.mySubcategory.serie" required>
+            <label >{{option.val}}</label>
+               </span>
+              </div>
+
+            </div>
+
+
+
+
+
+          </div>
+          <div class="modal-footer form-actions">
+            <div class="form-group">
+              <div class="pull-left">
+                <button class="btn btn-default btn-sm" type="button" value="Annuler" id="Annuler" data-dismiss="modal" onclick="clearModal();"><i class="fa fa-times"></i> Fermer</button>
+              </div>
+              <div class="pull-right">
+
+                <button [disabled]="myForm.form.invalid" id="ctl0_CONTENU_PAGE_ctl0_ctl7" class="btn btn-primary btn-sm btn-valider" alt="Valider" title="Valider"(click)="onSubmit();"href="javascript:;//ctl0_CONTENU_PAGE_ctl0_ctl7">
+                  Valider
+
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+  <!-- Dialog template -->
+
+
+</div>

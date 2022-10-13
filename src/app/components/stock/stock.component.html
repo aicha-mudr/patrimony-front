@@ -1,0 +1,216 @@
+
+
+<app-header></app-header>
+<div >
+  <div class="container">
+    <div id="bloc-loader"><div class="loader">@@CHARGEMENT@@ </div></div>
+
+
+    <div class="row">
+      <div class="col-md-12">
+        <h4 class="page-head-line">Stock des produits</h4>
+
+      </div>
+    </div>
+    
+   
+    <div class="row">
+      <div class="col-md-12">
+        <div class="tab-content">
+          <div id="tous" class="tab-pane fade in active">
+            <div id="ctl0_CONTENU_PAGE_ctl0_panelResultat" class="panel-table">
+              <div class="repeater-header">
+                <div class="repeater-header-left">
+                  
+                <div id="ctl0_CONTENU_PAGE_ctl0_panelTop" class="repeater-header-right">
+                 
+                </div>
+              </div>
+              <div class="repeater-viewport">
+                <div>
+                  <br><br>
+                    <label>Produits non inventaires en stock</label>
+                </div>
+                <table class="table table-bordered table-striped table-suivi table-ref table-hover">
+
+                    
+                  <thead>
+
+                  <tr>
+                    <th id="col_01" class="col-refs col-md-1">
+                      <a id="ctl0_CONTENU_PAGE_ctl0_repeaterResult_ctl0_ctl0" title="Trier par code produit" href="javascript:;//ctl0_CONTENU_PAGE_ctl0_repeaterResult_ctl0_ctl0">
+                        Code Produit <i class="fa fa-sort"></i>
+
+                      </a>
+                    </th>
+                    <th id="col_02" class="col-refs col-md-2">
+                      <a id="ctl0_CONTENU_PAGE_ctl0_repeaterResult_ctl0_ctl1" title="Trier par catégorie" href="javascript:;//ctl0_CONTENU_PAGE_ctl0_repeaterResult_ctl0_ctl1">
+                        Catégorie <i class="fa fa-sort"></i>
+
+                      </a>
+                    </th>
+                    <th id="col_03" class="col-refs col-md-2">
+                      <a id="ctl0_CONTENU_PAGE_ctl0_repeaterResult_ctl0_ctl2" title="Trier par sous catégorie" href="javascript:;//ctl0_CONTENU_PAGE_ctl0_repeaterResult_ctl0_ctl2">
+                        Sous Catégorie <i class="fa fa-sort"></i>
+
+                      </a>
+                    </th>
+                    <th id="col_04" class="col-refs col-md-2">
+                      <a id="ctl0_CONTENU_PAGE_ctl0_repeaterResult_ctl0_ctl3" title="Trier par désignation" href="javascript:;//ctl0_CONTENU_PAGE_ctl0_repeaterResult_ctl0_ctl3">
+                        Désignation Produit <i class="fa fa-sort"></i>
+
+                      </a>
+                    </th>
+
+                    <th id="col_05" class="col-refs col-md-1">
+                      <a id="ctl0_CONTENU_PAGE_ctl0_repeaterResult_ctl0_ctl5" title="Trier par désignation" href="javascript:;//ctl0_CONTENU_PAGE_ctl0_repeaterResult_ctl0_ctl5">
+                        Quantité en stock <i class="fa fa-sort"></i>
+
+                      </a>
+                    </th>
+
+                  </tr>
+                  </thead>
+
+
+                  <tbody>
+                  <tr *ngFor="let product of noInvProducts | orderBy: key : reverse |paginate:{itemsPerPage:6, currentPage:p};" >
+                    <td headers="col_01" >
+                      <div  >{{ product.idProduct.codeProduct}}</div>
+                    </td>
+                    <td headers="col_02">
+                      <div >{{product.idProduct.subcategory.categories.categoryName}}</div>
+                    </td>
+
+                    <td headers="col_03" >
+                      <div>
+                        {{ product.idProduct.subcategory.subcategoryName}}
+                      </div>
+                    </td>
+
+                    <td headers="col_04">
+                      <div>{{product.idProduct.designation}}</div>
+                    </td>
+
+                    <td headers="col_05">
+                      <div>{{product.quantityStock}}</div>
+                    </td>
+                    
+                  </tr>
+
+
+
+                  </tbody>
+
+                </table>
+                <br>
+              </div>
+              <!--Debut Pagnination top-->
+              <pagination-controls  (pageChange)="p=$event"></pagination-controls>
+
+              <!--Fin Pagnination top-->
+                <br>
+              <div class="repeater-viewport">
+                <div>
+                  <br>
+                    <label>Produits inventaires en stock</label>
+                </div>
+                <table class="table table-bordered table-striped table-suivi table-ref table-hover">
+
+                    
+                  <thead>
+
+                  <tr>
+                    <th id="col_01" class="col-refs col-md-1">
+                      <a id="ctl0_CONTENU_PAGE_ctl0_repeaterResult_ctl0_ctl0" title="Trier par code produit" href="javascript:;//ctl0_CONTENU_PAGE_ctl0_repeaterResult_ctl0_ctl0">
+                        Code Produit <i class="fa fa-sort"></i>
+
+                      </a>
+                    </th>
+                    <th id="col_02" class="col-refs col-md-2">
+                      <a id="ctl0_CONTENU_PAGE_ctl0_repeaterResult_ctl0_ctl1" title="Trier par catégorie" href="javascript:;//ctl0_CONTENU_PAGE_ctl0_repeaterResult_ctl0_ctl1">
+                        Catégorie <i class="fa fa-sort"></i>
+
+                      </a>
+                    </th>
+                    <th id="col_03" class="col-refs col-md-2">
+                      <a id="ctl0_CONTENU_PAGE_ctl0_repeaterResult_ctl0_ctl2" title="Trier par sous catégorie" href="javascript:;//ctl0_CONTENU_PAGE_ctl0_repeaterResult_ctl0_ctl2">
+                        Sous Catégorie <i class="fa fa-sort"></i>
+
+                      </a>
+                    </th>
+                    <th id="col_04" class="col-refs col-md-2">
+                      <a id="ctl0_CONTENU_PAGE_ctl0_repeaterResult_ctl0_ctl3" title="Trier par désignation" href="javascript:;//ctl0_CONTENU_PAGE_ctl0_repeaterResult_ctl0_ctl3">
+                        Désignation Produit <i class="fa fa-sort"></i>
+
+                      </a>
+                    </th>
+
+                    <th id="col_05" class="col-refs col-md-1">
+                      <a id="ctl0_CONTENU_PAGE_ctl0_repeaterResult_ctl0_ctl5" title="Trier par désignation" href="javascript:;//ctl0_CONTENU_PAGE_ctl0_repeaterResult_ctl0_ctl5">
+                        Etat 
+
+                      </a>
+                    </th>
+
+                    <th id="col_06" class="col-refs col-md-1">
+                        <a id="ctl0_CONTENU_PAGE_ctl0_repeaterResult_ctl0_ctl5" title="Trier par désignation" href="javascript:;//ctl0_CONTENU_PAGE_ctl0_repeaterResult_ctl0_ctl5">
+                          Bénificiaire
+  
+                        </a>
+                      </th>
+
+                  </tr>
+                  </thead>
+
+
+                  <tbody>
+                  <tr *ngFor="let product of Invproducts" >
+                    <td headers="col_01" >
+                      <div  >{{ product.idProduct.codeProduct}}</div>
+                    </td>
+                    <td headers="col_02">
+                      <div >{{product.idProduct.subcategory.categories.categoryName}}</div>
+                    </td>
+
+                    <td headers="col_03" >
+                      <div>
+                        {{ product.idProduct.subcategory.subcategoryName}}
+                      </div>
+                    </td>
+
+                    <td headers="col_04">
+                      <div>{{product.idProduct.designation}}</div>
+                    </td>
+
+                    <td headers="col_05">
+                      <div>{{product.idProductState.state}}</div>
+                    </td>
+                    <td headers="col_06">
+                        <div>{{product.idDemandaffectation?.beneficiary}}</div>
+                      </td>
+                  </tr>
+
+
+
+                  </tbody>
+
+                </table>
+                <br>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+   
+<script>
+  $(document).on('ready', function() {
+    $(".file-loading").fileinput({showCaption: false,  language: "fr",'showUpload': false});
+    $('.input-group.date').datepicker({format: "dd/mm/yyyy",language: "fr",enableOnReadonly: true});
+    $('.chosen-select').chosen({language: "fr"});
+  });
+</script>
+
+

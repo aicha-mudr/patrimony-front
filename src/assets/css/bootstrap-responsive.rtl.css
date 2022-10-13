@@ -1,0 +1,103 @@
+/*Added from Bootstap 3*/
+@media (max-width: 768px) {
+  .table-responsive {
+    width: 100%;
+    margin-bottom: 15px;
+    overflow-x: scroll;
+    overflow-y: hidden;
+    border: 1px solid #dddddd;
+  }
+  .table-responsive > .table {
+    margin-bottom: 0;
+    background-color: #fff;
+  }
+  .table-responsive > .table > thead > tr > th,
+  .table-responsive > .table > tbody > tr > th,
+  .table-responsive > .table > tfoot > tr > th,
+  .table-responsive > .table > thead > tr > td,
+  .table-responsive > .table > tbody > tr > td,
+  .table-responsive > .table > tfoot > tr > td {
+    white-space: nowrap;
+  }
+  .table-responsive > .table-bordered {
+    border: 0;
+  }
+  .table-responsive > .table-bordered > thead > tr > th:first-child,
+  .table-responsive > .table-bordered > tbody > tr > th:first-child,
+  .table-responsive > .table-bordered > tfoot > tr > th:first-child,
+  .table-responsive > .table-bordered > thead > tr > td:first-child,
+  .table-responsive > .table-bordered > tbody > tr > td:first-child,
+  .table-responsive > .table-bordered > tfoot > tr > td:first-child {
+    border-right: 0;
+  }
+  .table-responsive > .table-bordered > thead > tr > th:last-child,
+  .table-responsive > .table-bordered > tbody > tr > th:last-child,
+  .table-responsive > .table-bordered > tfoot > tr > th:last-child,
+  .table-responsive > .table-bordered > thead > tr > td:last-child,
+  .table-responsive > .table-bordered > tbody > tr > td:last-child,
+  .table-responsive > .table-bordered > tfoot > tr > td:last-child {
+    border-left: 0;
+  }
+  .table-responsive > .table-bordered > thead > tr:last-child > th,
+  .table-responsive > .table-bordered > tbody > tr:last-child > th,
+  .table-responsive > .table-bordered > tfoot > tr:last-child > th,
+  .table-responsive > .table-bordered > thead > tr:last-child > td,
+  .table-responsive > .table-bordered > tbody > tr:last-child > td,
+  .table-responsive > .table-bordered > tfoot > tr:last-child > td {
+    border-bottom: 0;
+  }
+}
+
+/*Debut - Added -  CSS Responsive data table*/
+@media only screen and (max-width: 768px) {
+    .tbl-not-responsive {display: none !important;}
+    .tbl-responsive {display: block !important;}
+	/* Force table to not be like tables anymore */
+	.table-responsive,
+	.table-responsive thead,
+	.table-responsive tbody,
+	.table-responsive th,
+	.table-responsive td,
+	.table-responsive tr {
+	   display: block;
+	}
+	/* Hide table headers (but not display: none;, for accessibility) */
+	.table-responsive thead tr {
+	   position: absolute;
+	   top: -9999px;
+	   right: -9999px;
+	}
+	 
+	.table-responsive p { margin:0; padding:0.5em; border-right:1px solid #ccc; }
+	.table-responsive tr { border-bottom: 1px solid #ccc; }
+	
+	.table-responsive td {
+	/* Behave like a "row" */
+	   border: none;
+	   border-bottom: 1px solid #eee;
+	   position: relative;
+	   white-space: normal;
+	   text-align:right;
+	   width:auto !important;
+	   padding:0 30% 0 0;
+	}
+	 
+	.table-responsive td:before {
+	   /* Now like a table header */
+	   position: absolute;
+	   /* Top/left values mimic padding */
+	   top: 6px;
+	   right: 6px;
+	   width: 25%;
+	   padding-left: 10px;
+	   white-space: nowrap;
+	   text-align:right;
+	   font-weight: bold;
+	}
+	 
+	/*
+	Label the data
+	*/
+	.table-responsive td:before { content: attr(data-title); }
+}
+/*Fin - Added - Debut CSS Responsive data table*/

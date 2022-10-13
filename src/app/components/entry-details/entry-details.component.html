@@ -1,0 +1,142 @@
+<app-header xmlns:skipLocationChange="http://www.w3.org/1999/xhtml"></app-header>
+
+  <div class="container" id="content3" #content3>
+    <div class="row">
+      <div class="col-md-12">
+        <h4 class="page-head-line">Détails du bon d'entrée</h4>
+      </div>
+    </div>
+    <div class="row">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <label>Bon d'entrée (En attente de validation)</label>
+        </div>
+        <div class="panel-body">
+
+          <div class="row " >
+            <div class="col-sm-4">
+              <label>Numéro de dépense :</label>
+              {{this.receivedReceipt.idRequest.numDepense}}</div>
+            <div class="col-md-4">
+              <label >Numéro de marché :</label>
+              {{this.receivedReceipt.idRequest.numMarcket}}
+            </div>
+            <div class="col-sm-4">
+              <label>Numéro de bon de commande :</label>
+              {{this.receivedReceipt.idRequest.numReceiptOrder}}
+            </div>
+            <div class="col-sm-4">
+                <label>Bon d'entrée :</label>
+                <a class="btn btn-xs btn-primary" title="Télécharger" (click)="makePDF()"><i class="fa fa-download"></i></a>
+            </div>
+
+
+          </div>
+          <div class="row " >
+            <div class="col-sm-4">
+              <label>DAP :</label>
+                {{this.receivedReceipt.idRequest.dap}}
+            </div>
+            <div class="col-md-4">
+              <label >N° de bon de livraison :</label>
+              {{this.receivedReceipt.numDeliveryReceipt}}
+            </div>
+            <div class="col-sm-4">
+              <label>Date de bon de livraison :</label>
+              {{this.receivedReceipt.dateDelivery}}
+            </div>
+          </div>
+          <div class="row " >
+            <div class="col-sm-4">
+              <label>Fournisseur :</label>
+              {{this.receivedReceipt.vendor}}
+            </div>
+
+
+          </div>
+          <div class="row spacer " *ngFor="let entry of FiltredDeliveryReceipts">
+            <div class="col-md-12 ">
+              <div class="repeater-viewport panel-table">
+                <div class="panel-heading">
+                  <label>N° de bon de livraison : {{this.entry.numDeliveryReceipt}}</label>
+                </div>
+                <table class="table table-bordered table-striped table-suivi table-matériel table-hover ">
+                  <thead>
+                  <tr>
+                    <th id="col_01" class="col-refs col-md-2">Catégorie</th>
+                    <th id="col_02" class="col-refs col-md-2">Sous catégorie</th>
+                    <th id="col_03" class="col-refs col-md-2">Désignation</th>
+                    <th id="col_04" class="col-refs col-md-2">Quantité</th>
+                    <th id="col_05" class="col-refs col-md-3">Observation</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                    <tr class="details_2" *ngFor="let deliverynoinv of entry.idDeliverynoinv">
+                      <td headers="col_01" >{{deliverynoinv.idProductnv.idProduct.subcategory.categories.categoryName}}</td>
+                      <td headers="col_02">{{deliverynoinv.idProductnv.idProduct.subcategory.subcategoryName}}</td>
+                      <td headers="col_03">{{deliverynoinv.idProductnv.idProduct.designation}}</td>
+                      <td headers="col_04">{{deliverynoinv.quantity}}</td>
+                      <td headers="col_05">{{deliverynoinv .observation}}</td>
+                    </tr>
+                  
+                  </tbody>
+                </table>
+                <br/>
+                <br/>
+
+                <table class="table table-bordered table-striped table-suivi table-matériel table-hover ">
+                  <thead>
+                  <tr>
+                    <th id="col_011" class="col-refs col-md-2">Catégorie</th>
+                    <th id="col_022" class="col-refs col-md-2">Sous catégorie</th>
+                    <th id="col_033" class="col-refs col-md-2">Désignation</th>
+                    <th id="col_044" class="col-refs col-md-2">N° d'inventaire</th>
+                    <th id="col_055" class="col-refs col-md-2">N° de série</th>
+                    <th id="col_066" class="col-refs col-md-3">Observation</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                    <ng-container *ngFor="let Invproduct of  Invproducts ">
+                    <tr class="details_2" *ngIf="Invproduct.idDelivery.id==entry.id">
+                      <td headers="col_011">{{Invproduct.idProduct.subcategory.categories.categoryName}}</td>
+                      <td headers="col_022">{{Invproduct.idProduct.subcategory.subcategoryName}}</td>
+                      <td headers="col_033">{{Invproduct.idProduct.designation}}</td>
+                      <td headers="col_044">{{Invproduct.numinv}}</td>
+                      <td headers="col_055">{{Invproduct.numserie}}</td>
+                      <td headers="col_066">{{Invproduct.observation}}</td>
+                    </tr>
+                  </ng-container>
+                  
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+          <div class="row spacer ">
+            <div class="panel-footer form-actions">
+              <div class="form-group">
+               
+              </div>
+            </div>
+          </div>
+
+          
+        </div>
+        <div class="panel-footer form-actions">
+          <div class="form-group">
+            
+          
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<script>
+  $(document).on('ready', function() {
+    $(".file-loading").fileinput({showCaption: false,  language: "fr",'showUpload': false});
+    $('.input-group.date').datepicker({format: "dd/mm/yyyy",language: "fr"});
+    $('.chosen-select').chosen({language: "fr"});
+  });
+</script>
+
